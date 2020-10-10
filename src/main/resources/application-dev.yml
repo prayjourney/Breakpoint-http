@@ -2,14 +2,14 @@
 breakpoint:
   upload:
     dir: D:/data0/uploads/
-    #1024*1024=1 048 576,5M=5 242 880
+    #1024*1024=1048576 5M=5242880
     chunkSize: 5 242 880
 
 spring:
   redis:
     host: 127.0.0.1
     port: 6379
-    timeout: 300
+    timeout: 300000
     jedis:
       pool:
         max-idle: 30

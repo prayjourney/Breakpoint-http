@@ -86,7 +86,7 @@ public class IndexController {
             logger.info("上传文件start。");
             try {
                 // 方法1
-                //storageService.uploadFileRandomAccessFile(param);
+                // storageService.uploadFileRandomAccessFile(param);
                 // 方法2 这个更快点
                 storageService.uploadFileByMappedByteBuffer(param);
             } catch (IOException e) {
