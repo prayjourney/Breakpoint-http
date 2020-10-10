@@ -11,7 +11,7 @@
     <body>
         <div id="uploader" class="wu-example">
             <!-- 用来存放文件信息 -->
-            <div id="thelist" class="uploader-list"></div>
+            <div id="theList" class="uploader-list"></div>
             <div class="btns">
                 <div id="picker">选择大文件</div>
                 <button id="ctlBtn" class="btn btn-default">开始上传</button>
@@ -22,7 +22,7 @@
         <script type="text/javascript" src="js/webuploader.min.js"></script>
         <script>
             var $btn = $('#ctlBtn');
-            var $thelist = $('#thelist');
+            var $theList = $('#theList');
             // 设置chunkSize是5MB, 这个需要前后设定同样的大小
             var chunkSize = 5 * 1024 * 1024;
 
@@ -67,7 +67,7 @@
                     return $.when(task);
                 },
                 beforeSend: function (block) {
-                    // block是上传文件的封装，block.file是上传的文件
+                    // block是上传文件的封装，block.file是上传的文件, 此处进行了分片？
                     console.log("block")
                     console.log(block)
                     var task = new $.Deferred();
@@ -127,7 +127,7 @@
             // 当有文件被添加进队列的时候
             uploader.on('fileQueued', function (file) {
                 console.log("fileQueued");
-                $thelist.append('<div id="' + file.id + '" class="item">' +
+                $theList.append('<div id="' + file.id + '" class="item">' +
                     '<h4 class="info">' + file.name + '</h4>' +
                     '<p class="state">等待上传...</p>' +
                     '</div>');
