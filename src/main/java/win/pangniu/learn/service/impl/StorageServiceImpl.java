@@ -31,7 +31,7 @@ public class StorageServiceImpl implements StorageService {
 
     private final Logger logger = LoggerFactory.getLogger(StorageServiceImpl.class);
     // 保存文件的根目录
-    private Path rootPaht;
+    private Path rootPath;
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
@@ -45,13 +45,13 @@ public class StorageServiceImpl implements StorageService {
 
     @Autowired
     public StorageServiceImpl(@Value("${breakpoint.upload.dir}") String location) {
-        this.rootPaht = Paths.get(location);
+        this.rootPath = Paths.get(location);
     }
 
     @Override
     public void deleteAll() {
         logger.info("开发初始化清理数据，start");
-        FileSystemUtils.deleteRecursively(rootPaht.toFile());
+        FileSystemUtils.deleteRecursively(rootPath.toFile());
         stringRedisTemplate.delete(Constants.FILE_UPLOAD_STATUS);
         stringRedisTemplate.delete(Constants.FILE_MD5_KEY);
         logger.info("开发初始化清理数据，end");
@@ -60,7 +60,7 @@ public class StorageServiceImpl implements StorageService {
     @Override
     public void init() {
         try {
-            Files.createDirectory(rootPaht);
+            Files.createDirectory(rootPath);
         } catch (FileAlreadyExistsException e) {
             logger.error("文件夹已经存在了，不用再创建。");
         } catch (IOException e) {
