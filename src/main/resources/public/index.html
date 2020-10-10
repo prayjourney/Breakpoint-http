@@ -9,22 +9,23 @@
 </head>
 <body>
 <div id="uploader" class="wu-example">
-    <!--用来存放文件信息-->
+    <!-- 用来存放文件信息 -->
     <div id="thelist" class="uploader-list"></div>
     <div class="btns">
         <div id="picker">选择大文件</div>
         <button id="ctlBtn" class="btn btn-default">开始上传</button>
     </div>
 </div>
-<!--引入JS-->
+<!-- 引入js文件 -->
 <script src="http://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript" src="js/webuploader.min.js"></script>
 <script>
     var $btn = $('#ctlBtn');
     var $thelist = $('#thelist');
+    // 设置chunkSize是5MB, 这个需要前后设定同样的大小
     var chunkSize = 5 * 1024 * 1024;
 
-    // HOOK 这个必须要再uploader实例化前面
+    // 注意：这个必须要再uploader实例化前面
     WebUploader.Uploader.register({
         'before-send-file': 'beforeSendFile',
         'before-send': 'beforeSend'
@@ -107,7 +108,7 @@
         //paste: '#uploader',
         swf: 'js/Uploader.swf',
         chunked: true,
-        chunkSize: chunkSize, // 字节 1M分块
+        chunkSize: chunkSize, // 字节1M分块
         threads: 3,
         server: 'index/fileUpload',
         auto: false,
@@ -135,10 +136,12 @@
         data.md5 = file.md5 || '';
         data.uid = file.uid;
     };
+
     // 上传中
     uploader.on('uploadProgress', function (file, percentage) {
         getProgressBar(file, percentage, "FILE", "上传进度");
     });
+
     // 上传返回结果
     uploader.on('uploadSuccess', function (file) {
         var text = '已上传';
@@ -150,11 +153,14 @@
     uploader.on('uploadError', function (file) {
         $('#' + file.id).find('p.state').text('上传出错');
     });
+
+    // 是否完全上传完毕
     uploader.on('uploadComplete', function (file) {
         // 隐藏进度条
         // fadeOutProgress(file, 'MD5');
         // fadeOutProgress(file, 'FILE');
     });
+
     // 文件上传
     $btn.on('click', function () {
         console.log("上传...");
