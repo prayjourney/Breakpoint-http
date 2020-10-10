@@ -41,13 +41,14 @@ public class IndexController {
     private StorageService storageService;
 
     /**
-     * 秒传判断，断点判断
+     * 秒传判断, 断点判断
      *
      * @return
      */
     @RequestMapping(value = "checkFileMd5", method = RequestMethod.POST)
     @ResponseBody
     public Object checkFileMd5(String md5) throws IOException {
+        // 从redis之中获取MD5信息, 用来检测
         Object processingObj = stringRedisTemplate.opsForHash().get(Constants.FILE_UPLOAD_STATUS, md5);
         if (processingObj == null) {
             return new ResultVo(ResultStatus.NO_HAVE);

@@ -35,17 +35,18 @@
                     console.log("beforeSendFile");
                     // Deferred对象在钩子回掉函数中经常要用到，用来处理需要等待的异步操作。
                     var task = new $.Deferred();
-                    // 根据文件内容来查询MD5
+                    // 根据文件内容来查询MD5，这是WebUploader提供的功能
                     uploader.md5File(file).progress(function (percentage) {   // 及时显示进度
                         console.log('计算md5进度:', percentage);
                         getProgressBar(file, percentage, "MD5", "MD5");
-                    }).then(function (val) { // 完成
+                    }).then(function (val) {
+                        // 需要上传的文件的md5值计算完成
                         console.log('md5 result:', val);
                         file.md5 = val;
                         // 模拟用户id
                         // file.uid = new Date().getTime() + "_" + Math.random() * 100;
                         file.uid = WebUploader.Base.guid();
-                        // 进行md5判断
+                        // 进行md5判断, 判断是否上传或者上传部分
                         $.post("index/checkFileMd5", {uid: file.uid, md5: file.md5},
                             function (data) {
                                 console.log(data.status);
@@ -66,7 +67,9 @@
                     return $.when(task);
                 },
                 beforeSend: function (block) {
+                    // block是上传文件的封装，block.file是上传的文件
                     console.log("block")
+                    console.log(block)
                     var task = new $.Deferred();
                     var file = block.file;
                     var missChunks = file.missChunks;
@@ -77,7 +80,7 @@
                         var flag = true;
                         for (var i = 0; i < missChunks.length; i++) {
                             if (blockChunk == missChunks[i]) {
-                                console.log(file.name + ":" + blockChunk + ":还没上传，现在上传去吧。");
+                                console.log(file.name + ":" + blockChunk + ":还没上传，将要上传!");
                                 flag = false;
                                 break;
                             }
@@ -105,8 +108,8 @@
                     md5: '',
                     chunkSize: chunkSize
                 },
-                //dnd: '#dndArea',
-                //paste: '#uploader',
+                // dnd: '#dndArea',
+                // paste: '#uploader',
                 swf: 'js/Uploader.swf',
                 chunked: true,
                 chunkSize: chunkSize, // 字节1M分块
@@ -130,7 +133,7 @@
                     '</div>');
             });
 
-            //当某个文件的分块在发送前触发，主要用来询问是否要添加附带参数，大文件在开起分片上传的前提下此事件可能会触发多次。
+            // 当某个文件的分块在发送前触发，主要用来询问是否要添加附带参数，大文件在开起分片上传的前提下此事件可能会触发多次。
             uploader.onUploadBeforeSend = function (obj, data) {
                 console.log("onUploadBeforeSend");
                 var file = obj.file;
