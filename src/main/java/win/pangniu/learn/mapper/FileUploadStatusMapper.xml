@@ -7,4 +7,9 @@
         FROM `file_upload_status`
         WHERE fileMd5 = #{md5}
     </select>
+    <select id="selectFileMd5Obj" parameterType="string" resultType="win.pangniu.learn.pojo.FileUploadStatus">
+        SELECT *
+        FROM `file_upload_status`
+        WHERE fileMd5 = #{md5}
+    </select>
 </mapper>

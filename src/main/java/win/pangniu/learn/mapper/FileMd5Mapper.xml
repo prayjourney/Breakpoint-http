@@ -7,4 +7,9 @@
         FROM `file_md5`
         WHERE fileMd5 = #{md5}
     </select>
+    <select id="selectFilePath" resultType="java.lang.String">
+        SELECT filePath
+        FROM `file_md5`
+        WHERE fileMd5 = #{md5}
+    </select>
 </mapper>

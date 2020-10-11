@@ -12,4 +12,6 @@ import win.pangniu.learn.pojo.FileUploadStatus;
 @Repository
 public interface FileUploadStatusMapper extends BaseMapper<FileUploadStatus> {
     int selectFileMd5(String md5);
+
+    FileUploadStatus selectFileMd5Obj(String md5);
 }
