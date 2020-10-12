@@ -39,26 +39,24 @@ dependencies {
              * 'org.springframework.boot:spring-boot-starter-data-redis:2.2.6.RELEASE',
              */
             'org.springframework.boot:spring-boot-starter-jdbc:2.2.6.RELEASE',
-            'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.3',
-            'com.baomidou.mybatis-plus-boot-starter:3.3.2',
-            'com.alibaba.druid:1.1.24'
+            'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.3'
 
     )
-    // https://mvnrepository.com/artifact/commons-io/commons-io
+    // 文件上传
     compile group: 'commons-io', name: 'commons-io', version: '2.5'
-    // https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload
     compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.3.2'
-    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.5'
-    //providedCompile("org.springframework.boot:spring-boot-starter-tomcat")
     /**
      * 使用mysql来代替redis完成存储
      * spring2.x集成redis所需common-pool2，使用jedis必须依赖它
      * https://mvnrepository.com/artifact/org.apache.commons/commons-pool2
      * compile group: 'org.apache.commons', name: 'commons-pool2', version: '2.8.1'
      */
-    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    // mysql相关
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.20'
+    compile group: 'com.alibaba', name: 'druid-spring-boot-starter', version: '1.1.24'
+    compile group: 'com.baomidou', name: 'mybatis-plus', version: '3.1.2'
+
     testCompile group: 'junit', name: 'junit', version: '4.12'
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
