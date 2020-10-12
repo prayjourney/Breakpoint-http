@@ -5,12 +5,13 @@ import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import win.pangniu.learn.mapper.FileMd5Mapper;
+import win.pangniu.learn.mapper.FileUploadStatusMapper;
 import win.pangniu.learn.param.MultipartFileParam;
 import win.pangniu.learn.service.StorageService;
 import win.pangniu.learn.utils.Constants;
@@ -35,7 +36,10 @@ public class IndexController {
     private Logger logger = LoggerFactory.getLogger(IndexController.class);
 
     @Autowired
-    private StringRedisTemplate stringRedisTemplate;
+    private FileUploadStatusMapper fileUploadStatusMapper;
+
+    @Autowired
+    private FileMd5Mapper fileMd5Mapper;
 
     @Autowired
     private StorageService storageService;
@@ -49,13 +53,13 @@ public class IndexController {
     @ResponseBody
     public Object checkFileMd5(String md5) throws IOException {
         // 从redis之中获取MD5信息, 用来检测
-        Object processingObj = stringRedisTemplate.opsForHash().get(Constants.FILE_UPLOAD_STATUS, md5);
+        Object processingObj = fileUploadStatusMapper.selectFileMd5Obj(md5);
         if (processingObj == null) {
             return new ResultVo(ResultStatus.NO_HAVE);
         }
         String processingStr = processingObj.toString();
         boolean processing = Boolean.parseBoolean(processingStr);
-        String value = stringRedisTemplate.opsForValue().get(Constants.FILE_MD5_KEY + md5);
+        String value = fileMd5Mapper.selectFilePath(Constants.FILE_MD5_KEY + md5);
         if (processing) {
             return new ResultVo(ResultStatus.IS_HAVE, value);
         } else {
