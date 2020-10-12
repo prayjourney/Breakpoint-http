@@ -1,14 +1,19 @@
 package win.pangniu.learn.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
+import win.pangniu.learn.mapper.FileMd5Mapper;
+import win.pangniu.learn.mapper.FileUploadStatusMapper;
 import win.pangniu.learn.param.MultipartFileParam;
+import win.pangniu.learn.pojo.FileMd5;
+import win.pangniu.learn.pojo.FileUploadStatus;
 import win.pangniu.learn.service.StorageService;
 import win.pangniu.learn.utils.Constants;
 import win.pangniu.learn.utils.FileMD5Util;
@@ -34,7 +39,10 @@ public class StorageServiceImpl implements StorageService {
     private Path rootPath;
 
     @Autowired
-    private StringRedisTemplate stringRedisTemplate;
+    private FileMd5Mapper fileMd5Mapper;
+
+    @Autowired
+    private FileUploadStatusMapper fileUploadStatusMapper;
 
     // 这个必须与前端设定的值一致
     @Value("${breakpoint.upload.chunkSize}")
@@ -52,8 +60,12 @@ public class StorageServiceImpl implements StorageService {
     public void deleteAll() {
         logger.info("开发初始化清理数据，start");
         FileSystemUtils.deleteRecursively(rootPath.toFile());
-        stringRedisTemplate.delete(Constants.FILE_UPLOAD_STATUS);
-        stringRedisTemplate.delete(Constants.FILE_MD5_KEY);
+        QueryWrapper wrapperFile = new QueryWrapper();
+        wrapperFile.gt("id", 0);
+        fileMd5Mapper.delete(wrapperFile);
+        QueryWrapper wrapperStatus = new QueryWrapper();
+        wrapperStatus.gt("id", 0);
+        fileUploadStatusMapper.delete(wrapperStatus);
         logger.info("开发初始化清理数据，end");
     }
 
@@ -154,15 +166,28 @@ public class StorageServiceImpl implements StorageService {
 
         accessConfFile.close();
         if (isComplete == Byte.MAX_VALUE) {
-            stringRedisTemplate.opsForHash().put(Constants.FILE_UPLOAD_STATUS, param.getMd5(), "true");
-            stringRedisTemplate.opsForValue().set(Constants.FILE_MD5_KEY + param.getMd5(), uploadDirPath + "/" + fileName);
+            FileUploadStatus status = new FileUploadStatus();
+            status.setFileMd5(param.getMd5());
+            status.setUploadStatus("true");
+            fileUploadStatusMapper.insert(status);
+            FileMd5 fileMd5 = new FileMd5();
+            fileMd5.setFileMd5(Constants.FILE_MD5_KEY + param.getMd5());
+            fileMd5.setFilePath(uploadDirPath + "/" + fileName);
+            fileMd5Mapper.insert(fileMd5);
             return true;
         } else {
-            if (!stringRedisTemplate.opsForHash().hasKey(Constants.FILE_UPLOAD_STATUS, param.getMd5())) {
-                stringRedisTemplate.opsForHash().put(Constants.FILE_UPLOAD_STATUS, param.getMd5(), "false");
+            if (fileUploadStatusMapper.selectFileMd5(param.getMd5()) <= 0) {
+                FileUploadStatus status = new FileUploadStatus();
+                status.setFileMd5(param.getMd5());
+                status.setUploadStatus("false");
+                fileUploadStatusMapper.insert(status);
             }
-            if (stringRedisTemplate.hasKey(Constants.FILE_MD5_KEY + param.getMd5())) {
-                stringRedisTemplate.opsForValue().set(Constants.FILE_MD5_KEY + param.getMd5(), uploadDirPath + "/" + fileName + ".conf");
+
+            if (fileMd5Mapper.selectFileMd5(param.getMd5()) >= 1) {
+                FileMd5 fileMd5 = new FileMd5();
+                fileMd5.setFileMd5(Constants.FILE_MD5_KEY + param.getMd5());
+                fileMd5.setFilePath(uploadDirPath + "/" + fileName + ".conf");
+                fileMd5Mapper.insert(fileMd5);
             }
             return false;
         }
