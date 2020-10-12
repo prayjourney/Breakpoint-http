@@ -11,4 +11,5 @@ import win.pangniu.learn.pojo.FileMd5;
  */
 @Repository
 public interface FileMd5Mapper extends BaseMapper<FileMd5> {
+    int selectFileMd5(String md5);
 }

@@ -2,7 +2,7 @@ package win.pangniu.learn.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
-import win.pangniu.learn.pojo.FileMd5;
+import win.pangniu.learn.pojo.FileUploadStatus;
 
 /**
  * @Author renjiaxin
@@ -10,5 +10,6 @@ import win.pangniu.learn.pojo.FileMd5;
  * @Description
  */
 @Repository
-public interface FileUploadStatusMapper extends BaseMapper<FileMd5> {
+public interface FileUploadStatusMapper extends BaseMapper<FileUploadStatus> {
+    int selectFileMd5(String md5);
 }
