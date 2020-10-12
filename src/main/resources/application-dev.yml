@@ -14,7 +14,7 @@ spring:
   datasource:
     username: root
     password: 123456
-    url: jdbc:mysql://localhost:3306/ourschool?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/tmp_db?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
     driver-class-name: com.mysql.cj.jdbc.Driver
     platform: mysql
     type: com.alibaba.druid.pool.DruidDataSource
@@ -37,7 +37,8 @@ spring:
 
 # mybatis的mapper文件存放的位置，java和mapper.xml不在同一位置时候起作用
 mybatis:
-  mapper-locations: classpath*:com/example/demo/mapper/*.xml
+  type-aliases-package: win.pangniu.learn.pojo
+  mapper-locations: classpath:/win/pangniu/learn/mapper/*.xml
 
 # mybatis-plus的配置
 mybatis-plus:
