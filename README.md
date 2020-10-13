@@ -15,6 +15,7 @@
   * [秒传功能](#秒传功能)
   * [断点续传](#断点续传)
 * [总结](#总结)
+* [后续](#后续)
 
 
 
@@ -230,6 +231,16 @@
 
 
 
+<a name="后续"></a>
+## 后续
+由于本项目使用的是Gradle+redis的方案，对于目前的一般项目而言，Gradle使用的还比较少，redis也是一种方式，传统的数据库，在使用之中还是有比较广泛的
+使用基础，如果当项目之中使用了数据库，或者不太想引入redis的时候，我们就可以采用mybatis存取相关的数据，在`store-mysql`的分支之中，我继续使用了
+Gradle的管理方式，但是就目前而言，其对于mapper.xml文件的打包，还有些许问题，而使用maven+mybatis(mybatis-plus)的方式在我的github
+[springboot2.x-integration](https://github.com/prayjourney/springboot2.x-integration)的master分支之中集成了功能，并且可以正常
+运行，如果访问github网速过慢，可以访问gitee的[springboot2.x-integration](https://gitee.com/zuiguangyin123/springboot2.x-integration)
+的master分支，同时如果有问题或者发现bug, 可以提issue给我，欢迎fork或者star。
+
+
+
 ## 参考文献
-1. http://fex.baidu.com/webuploader/, 2. http://www.zuidaima.com/blog/2819949848316928.htm, 3. https://my.oschina.net
-/feichexia/blog/212318
+1. http://fex.baidu.com/webuploader/, 2. http://www.zuidaima.com/blog/2819949848316928.htm, 3. https://my.oschina.net/feichexia/blog/212318
