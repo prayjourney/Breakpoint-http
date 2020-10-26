@@ -30,3 +30,5 @@ README.html
 gradlew
 gradlew.bat
 gradle
+out
+.vscode
