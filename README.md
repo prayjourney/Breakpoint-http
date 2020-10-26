@@ -71,6 +71,8 @@
 2. 秒传功能演示页面
 ![duan1](https://fourwenwen.github.io/fww/image/bphttp/duan1.jpg)
 详情自己运行就知道。
+3. 修改后的页面 
+![修改后的页面](https://raw.githubusercontent.com/prayjourney/img-home/master/img/20201026161943.png)
 
 
 
