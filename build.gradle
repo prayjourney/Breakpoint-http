@@ -65,6 +65,7 @@ dependencies {
 processResources {
     from('src/main/java') {
         include '**/*.xml'
+        exclude "**/*.java" // 源码文件中.java 文件是不需要的
     }
 }
 // 打包问题
