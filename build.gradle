@@ -61,23 +61,15 @@ dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
-//// 打包的时候需要包含mapper文件
-//processResources {
-//    from('src/main/java') {
-//        include '**/*.xml'
-//    }
-//}
-
-// sourceSets.main.resources.srcDirs = ["src/main/java","src/main/resources"]
-task mapperXmlCopy(type: Copy) {
-    copy {
-        from("src/main/java") {   //把src.main.java目录下的所有静态资源（例如XML）
-            include("**/*Mapper.xml")        //标明以Mapper结尾的XML文件资源
-        }
-        into("${projectDir}/out/production/resources")  //拷贝到out/production/resources目录下
+// 打包的时候需要包含mapper文件
+processResources {
+    from('src/main/java') {
+        include '**/*.xml'
     }
-    print "Copy Success"
 }
+// 打包问题
+// https://blog.csdn.net/leegoowang/article/details/79020608
+// https://blog.csdn.net/u011528738/article/details/79992112
 
 
 // war
