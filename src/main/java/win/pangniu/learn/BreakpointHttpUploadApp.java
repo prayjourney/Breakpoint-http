@@ -11,10 +11,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @MapperScan("win.pangniu.learn.mapper")
-public class App {
+public class BreakpointHttpUploadApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
+        SpringApplication.run(BreakpointHttpUploadApp.class, args);
     }
 
 }
