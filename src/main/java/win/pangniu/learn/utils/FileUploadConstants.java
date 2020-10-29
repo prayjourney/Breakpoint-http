@@ -21,11 +21,7 @@ public enum FileUploadConstants {
         this.name = name;
     }
 
-    public String getName() {
+    public String val() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }

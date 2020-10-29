@@ -14,7 +14,7 @@ import win.pangniu.learn.mapper.FileMd5Mapper;
 import win.pangniu.learn.mapper.FileUploadStatusMapper;
 import win.pangniu.learn.param.MultipartFileParam;
 import win.pangniu.learn.service.StorageService;
-import win.pangniu.learn.utils.Constants;
+import win.pangniu.learn.utils.FileUploadConstants;
 import win.pangniu.learn.vo.ResultStatus;
 import win.pangniu.learn.vo.ResultVo;
 
@@ -59,7 +59,7 @@ public class IndexController {
         }
         String processingStr = processingObj.toString();
         boolean processing = Boolean.parseBoolean(processingStr);
-        String value = fileMd5Mapper.selectFilePath(Constants.FILE_MD5_KEY + md5);
+        String value = fileMd5Mapper.selectFilePath(FileUploadConstants.FILE_MD5_KEY.val() + md5);
         if (processing) {
             return new ResultVo(ResultStatus.IS_HAVE, value);
         } else {

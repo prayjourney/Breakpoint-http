@@ -1,6 +1,5 @@
 package win.pangniu.learn.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
@@ -15,7 +14,7 @@ import win.pangniu.learn.param.MultipartFileParam;
 import win.pangniu.learn.pojo.FileMd5;
 import win.pangniu.learn.pojo.FileUploadStatus;
 import win.pangniu.learn.service.StorageService;
-import win.pangniu.learn.utils.Constants;
+import win.pangniu.learn.utils.FileUploadConstants;
 import win.pangniu.learn.utils.FileMD5Util;
 
 import java.io.File;
@@ -171,7 +170,7 @@ public class StorageServiceImpl implements StorageService {
             status.setUploadStatus("true");
             fileUploadStatusMapper.insert(status);
             FileMd5 fileMd5 = new FileMd5();
-            fileMd5.setFileMd5(Constants.FILE_MD5_KEY + param.getMd5());
+            fileMd5.setFileMd5(FileUploadConstants.FILE_MD5_KEY.val() + param.getMd5());
             fileMd5.setFilePath(uploadDirPath + "/" + fileName);
             fileMd5Mapper.insert(fileMd5);
             return true;
@@ -185,7 +184,7 @@ public class StorageServiceImpl implements StorageService {
 
             if (fileMd5Mapper.selectFileMd5(param.getMd5()) >= 1) {
                 FileMd5 fileMd5 = new FileMd5();
-                fileMd5.setFileMd5(Constants.FILE_MD5_KEY + param.getMd5());
+                fileMd5.setFileMd5(FileUploadConstants.FILE_MD5_KEY.val() + param.getMd5());
                 fileMd5.setFilePath(uploadDirPath + "/" + fileName + ".conf");
                 fileMd5Mapper.insert(fileMd5);
             }
