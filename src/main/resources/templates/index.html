@@ -4,9 +4,7 @@
         <meta charset="UTF-8">
         <title>断点上传</title>
         <link href="/css/webuploader.css" rel="stylesheet" type="text/css">
-        <link crossorigin="anonymous" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
-              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-              rel="stylesheet">
+        <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
         <script src="http://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
         <script src="/js/webuploader.min.js" type="text/javascript"></script>
     </head>
@@ -25,10 +23,10 @@
         </div>
 
         <script>
-            var $btn = $('#ctlBtn');
-            var $theList = $('#theList');
+            let $btn = $('#ctlBtn');
+            let $theList = $('#theList');
             // 设置chunkSize是5MB, 这个需要前后设定同样的大小
-            var chunkSize = 5 * 1024 * 1024;
+            let chunkSize = 5 * 1024 * 1024;
 
             // 注意：这个必须要再uploader实例化前面
             WebUploader.Uploader.register({
@@ -38,7 +36,7 @@
                 beforeSendFile: function (file) {
                     console.log("beforeSendFile");
                     // Deferred对象在钩子回掉函数中经常要用到，用来处理需要等待的异步操作。
-                    var task = new $.Deferred();
+                    let task = new $.Deferred();
                     // 根据文件内容来查询MD5，这是WebUploader提供的功能
                     uploader.md5File(file).progress(function (percentage) {   // 及时显示进度
                         console.log('计算md5进度:', percentage);
@@ -54,7 +52,7 @@
                         $.post("index/checkFileMd5", {uid: file.uid, md5: file.md5},
                             function (data) {
                                 console.log(data.status);
-                                var status = data.status.value;
+                                let status = data.status.value;
                                 task.resolve();
                                 if (status == 101) {
                                     // 文件不存在，那就正常流程
@@ -74,15 +72,15 @@
                     // block是上传文件的封装，block.file是上传的文件, 此处进行了分片？
                     console.log("block")
                     console.log(block)
-                    var task = new $.Deferred();
-                    var file = block.file;
-                    var missChunks = file.missChunks;
-                    var blockChunk = block.chunk;
+                    let task = new $.Deferred();
+                    let file = block.file;
+                    let missChunks = file.missChunks;
+                    let blockChunk = block.chunk;
                     console.log("当前分块：" + blockChunk);
                     console.log("missChunks:" + missChunks);
                     if (missChunks !== null && missChunks !== undefined && missChunks !== '') {
-                        var flag = true;
-                        for (var i = 0; i < missChunks.length; i++) {
+                        let flag = true;
+                        for (let i = 0; i < missChunks.length; i++) {
                             if (blockChunk == missChunks[i]) {
                                 console.log(file.name + ":" + blockChunk + ":还没上传，将要上传!");
                                 flag = false;
@@ -102,7 +100,7 @@
             });
 
             // 实例化
-            var uploader = WebUploader.create({
+            let uploader = WebUploader.create({
                 pick: {
                     id: '#picker',
                     label: '点击选择文件'
@@ -140,7 +138,7 @@
             // 当某个文件的分块在发送前触发，主要用来询问是否要添加附带参数，大文件在开启分片上传的前提下此事件可能会触发多次。
             uploader.onUploadBeforeSend = function (obj, data) {
                 console.log("onUploadBeforeSend");
-                var file = obj.file;
+                let file = obj.file;
                 data.md5 = file.md5 || '';
                 data.uid = file.uid;
             };
@@ -152,7 +150,7 @@
 
             // 上传返回结果
             uploader.on('uploadSuccess', function (file) {
-                var text = '已上传';
+                let text = '已上传';
                 if (file.pass) {
                     text = "文件秒传功能，文件已上传。"
                 }
@@ -184,7 +182,7 @@
              * @param titleName 标题名
              */
             function getProgressBar(file, percentage, id_Prefix, titleName) {
-                var $li = $('#' + file.id), $percent = $li.find('#' + id_Prefix + '-progress-bar');
+                let $li = $('#' + file.id), $percent = $li.find('#' + id_Prefix + '-progress-bar');
                 // 避免重复创建
                 if (!$percent.length) {
                     $percent = $('<div id="' + id_Prefix + '-progress" class="progress progress-striped active">' +
@@ -193,7 +191,7 @@
                         '</div>'
                     ).appendTo($li).find('#' + id_Prefix + '-progress-bar');
                 }
-                var progressPercentage = percentage * 100 + '%';
+                let progressPercentage = percentage * 100 + '%';
                 $percent.css('width', progressPercentage);
                 $percent.html(titleName + ':' + progressPercentage);
             }
