@@ -3,10 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <title>断点上传</title>
-        <link rel="stylesheet" type="text/css" href="css/webuploader.css">
+        <link rel="stylesheet" type="text/css" href="/css/webuploader.css">
         <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
               integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
               crossorigin="anonymous">
+        <script src="http://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+        <script type="text/javascript" src="/js/webuploader.min.js"></script>
     </head>
     <body>
         <div id="uploader" class="wu-example">
@@ -17,9 +19,7 @@
                 <button id="ctlBtn" class="btn btn-default">开始上传</button>
             </div>
         </div>
-        <!-- 引入js文件 -->
-        <script src="http://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-        <script type="text/javascript" src="js/webuploader.min.js"></script>
+
         <script>
             var $btn = $('#ctlBtn');
             var $theList = $('#theList');
