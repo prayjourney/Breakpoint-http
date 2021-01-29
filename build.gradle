@@ -2,11 +2,14 @@ group 'win.pangniu.learn'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
-apply plugin: 'jar'
 apply plugin: 'maven'
+apply plugin: 'idea'
+apply plugin: 'application'
 // springboot2.x的plugin
 apply plugin: 'io.spring.dependency-management'
-apply plugin: 'org.springframework.boot'
+
+// 主类
+mainClassName = 'win.pangniu.learn.BreakPointHttpApplication'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
@@ -19,7 +22,7 @@ buildscript {
     }
     dependencies {
         classpath(
-                'org.springframework.boot:spring-boot-gradle-plugin:2.2.6.RELEASE'
+                'org.springframework.boot:spring-boot-gradle-plugin:2.3.7.RELEASE'
         )
     }
 }
@@ -44,7 +47,7 @@ dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
-// war
-war {
-    archiveName 'bphttp.jar'
+jar {
+    archiveBaseName = 'bphttp.jar'
+    archiveVersion = '0.1.0'
 }
