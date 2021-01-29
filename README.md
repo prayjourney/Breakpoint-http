@@ -1,5 +1,4 @@
 # Breakpoint-http
-![wen icon](https://fourwenwen.github.io/fww/image/logo100_100.jpg)
 ## 目录
 * [背景介绍](#背景介绍)
 * [项目介绍](#项目介绍)
@@ -239,6 +238,9 @@ Gradle的管理方式，但是就目前而言，其对于mapper.xml文件的打�
 [springboot2.x-integration](https://github.com/prayjourney/springboot2.x-integration)的master分支之中集成了功能，并且可以正常
 运行，如果访问github网速过慢，可以访问gitee的[springboot2.x-integration](https://gitee.com/zuiguangyin123/springboot2.x-integration)
 的master分支，同时如果有问题或者发现bug, 可以提issue给我，欢迎fork或者star。
+
+## 更新记录
+当前默认分支是springboot2.x, 修改项目为springboot2+redis+maven的方式。
 
 
 
