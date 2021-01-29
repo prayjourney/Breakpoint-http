@@ -38,12 +38,14 @@ public class IndexController {
     /**
      * 秒传判断, 断点判断
      *
+     * @param md5
      * @return
+     * @throws IOException
      */
     @RequestMapping(value = "checkFileMd5", method = RequestMethod.POST)
     @ResponseBody
     public Object checkFileMd5(String md5) throws IOException {
-        // 从redis之中获取MD5信息, 用来检测
+        // 从redis之中获取MD5信息
         Object processingObj = stringRedisTemplate.opsForHash().get(Constants.FILE_UPLOAD_STATUS, md5);
         if (processingObj == null) {
             return new ResultVo(ResultStatus.NO_HAVE);
@@ -79,19 +81,18 @@ public class IndexController {
     public ResponseEntity fileUpload(MultipartFileParam param, HttpServletRequest request) {
         boolean isMultipart = ServletFileUpload.isMultipartContent(request);
         if (isMultipart) {
-            logger.info("上传文件start。");
+            logger.info("上传文件start!");
             try {
                 // 方法1
                 // storageService.uploadFileRandomAccessFile(param);
-                // 方法2 这个更快点
                 storageService.uploadFileByMappedByteBuffer(param);
             } catch (IOException e) {
                 e.printStackTrace();
-                logger.error("文件上传失败。{}", param.toString());
+                logger.error("文件上传失败, {}", param.toString());
             }
-            logger.info("上传文件end。");
+            logger.info("上传文件end!");
         }
-        return ResponseEntity.ok().body("上传成功。");
+        return ResponseEntity.ok().body("上传成功!");
     }
 
 }

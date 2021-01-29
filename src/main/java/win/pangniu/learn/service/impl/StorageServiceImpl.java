@@ -1,8 +1,7 @@
 package win.pangniu.learn.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -26,10 +25,9 @@ import java.nio.file.Paths;
 /**
  * 存储操作的service, 具体实现可以由redis, mysql, mongodb等来实现
  */
+@Slf4j
 @Service
 public class StorageServiceImpl implements StorageService {
-
-    private final Logger logger = LoggerFactory.getLogger(StorageServiceImpl.class);
     // 保存文件的根目录
     private Path rootPath;
 
@@ -50,11 +48,11 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     public void deleteAll() {
-        logger.info("开发初始化清理数据，start");
+        log.info("开发初始化清理数据, start");
         FileSystemUtils.deleteRecursively(rootPath.toFile());
         stringRedisTemplate.delete(Constants.FILE_UPLOAD_STATUS);
         stringRedisTemplate.delete(Constants.FILE_MD5_KEY);
-        logger.info("开发初始化清理数据，end");
+        log.info("开发初始化清理数据, end");
     }
 
     @Override
@@ -62,9 +60,9 @@ public class StorageServiceImpl implements StorageService {
         try {
             Files.createDirectory(rootPath);
         } catch (FileAlreadyExistsException e) {
-            logger.error("文件夹已经存在了，不用再创建。");
+            log.error("文件夹已经存在了, 不用再创建!");
         } catch (IOException e) {
-            logger.error("初始化root文件夹失败。", e);
+            log.error("初始化root文件夹失败. ", e);
         }
     }
 
@@ -178,7 +176,7 @@ public class StorageServiceImpl implements StorageService {
     public boolean renameFile(File toBeRenamed, String toFileNewName) {
         // 检查要重命名的文件是否存在，是否是文件
         if (!toBeRenamed.exists() || toBeRenamed.isDirectory()) {
-            logger.info("File does not exist: " + toBeRenamed.getName());
+            log.info("File does not exist: " + toBeRenamed.getName());
             return false;
         }
         String p = toBeRenamed.getParent();
