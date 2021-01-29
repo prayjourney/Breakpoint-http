@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * 结果类型枚举
- * Created by 超文 on 2017/5/2.
- * version 1.0
  */
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum ResultStatus {
