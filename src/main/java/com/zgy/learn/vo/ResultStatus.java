@@ -1,4 +1,4 @@
-package win.pangniu.learn.vo;
+package com.zgy.learn.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

@@ -1,4 +1,4 @@
-package win.pangniu.learn.utils;
+package com.zgy.learn.utils;
 
 /**
  * 常量表

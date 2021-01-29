@@ -1,5 +1,9 @@
-package win.pangniu.learn.service.impl;
+package com.zgy.learn.service.impl;
 
+import com.zgy.learn.param.MultipartFileParam;
+import com.zgy.learn.service.StorageService;
+import com.zgy.learn.utils.Constants;
+import com.zgy.learn.utils.FileMD5Util;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,10 +11,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
-import win.pangniu.learn.param.MultipartFileParam;
-import win.pangniu.learn.service.StorageService;
-import win.pangniu.learn.utils.Constants;
-import win.pangniu.learn.utils.FileMD5Util;
 
 import java.io.File;
 import java.io.IOException;

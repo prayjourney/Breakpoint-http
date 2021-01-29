@@ -1,4 +1,4 @@
-package win.pangniu.learn.param;
+package com.zgy.learn.param;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

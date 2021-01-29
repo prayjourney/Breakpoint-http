@@ -1,6 +1,7 @@
-package win.pangniu.learn.test;
+package com.zgy.learn.test;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataAccessException;

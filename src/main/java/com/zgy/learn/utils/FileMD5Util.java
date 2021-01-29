@@ -1,4 +1,4 @@
-package win.pangniu.learn.utils;
+package com.zgy.learn.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

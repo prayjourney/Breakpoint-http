@@ -1,6 +1,6 @@
-package win.pangniu.learn.service;
+package com.zgy.learn.service;
 
-import win.pangniu.learn.param.MultipartFileParam;
+import com.zgy.learn.param.MultipartFileParam;
 
 import java.io.IOException;
 

@@ -1,5 +1,8 @@
-package win.pangniu.learn.controller;
+package com.zgy.learn.controller;
 
+import com.zgy.learn.param.MultipartFileParam;
+import com.zgy.learn.service.StorageService;
+import com.zgy.learn.utils.Constants;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
@@ -11,11 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import win.pangniu.learn.param.MultipartFileParam;
-import win.pangniu.learn.service.StorageService;
-import win.pangniu.learn.utils.Constants;
-import win.pangniu.learn.vo.ResultStatus;
-import win.pangniu.learn.vo.ResultVo;
+import com.zgy.learn.vo.ResultStatus;
+import com.zgy.learn.vo.ResultVo;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
