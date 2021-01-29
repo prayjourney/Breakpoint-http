@@ -2,6 +2,7 @@ package win.pangniu.learn.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,10 +17,9 @@ import java.security.MessageDigest;
 import java.security.PrivilegedAction;
 
 /**
- * 文件md5值
- * Created by 超文 on 2016/10/10.
- * version 1.0
+ * MD5检测工具
  */
+@Component
 public class FileMD5Util {
 
     private final static Logger logger = LoggerFactory.getLogger(FileMD5Util.class);

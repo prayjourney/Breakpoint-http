@@ -6,7 +6,6 @@ import java.io.IOException;
 
 /**
  * 存储操作的service
- * Created by 超文 on 2017/5/2.
  */
 public interface StorageService {
 

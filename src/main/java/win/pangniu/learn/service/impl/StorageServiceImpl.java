@@ -24,7 +24,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * Created by 超文 on 2017/5/2.
+ * 存储操作的service, 具体实现可以由redis, mysql, mongodb等来实现
  */
 @Service
 public class StorageServiceImpl implements StorageService {
