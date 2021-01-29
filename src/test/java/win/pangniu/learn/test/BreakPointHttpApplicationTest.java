@@ -2,15 +2,20 @@ package win.pangniu.learn.test;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.SessionCallback;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
-public class AppTest extends BaseTest {
+
+@SpringBootTest
+@ActiveProfiles(value = "dev")
+public class BreakPointHttpApplicationTest {
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
